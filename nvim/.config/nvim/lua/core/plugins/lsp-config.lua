@@ -212,6 +212,7 @@ return { -- LSP Plugins
         ts_ls = {},
         tailwindcss = {},
         eslint = {},
+        gopls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },

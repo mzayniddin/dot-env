@@ -38,6 +38,7 @@ return {
       typescriptreact = { 'prettier', 'eslint_d' },
       css = { 'prettier' },
       html = { 'prettier' },
+      json = { 'prettier' },
     },
   },
 }
