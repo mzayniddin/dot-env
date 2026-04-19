@@ -8,10 +8,11 @@ return {
       text = { 'vale' },
       json = { 'jsonlint' },
       dockerfile = { 'hadolint' },
-      -- javascript = { 'eslint' },
-      -- javascriptreact = { 'eslint' },
-      -- typescript = { 'eslint' },
-      -- typescriptreact = { 'eslint' },
+      astro = { 'eslint' },
+      javascript = { 'eslint' },
+      javascriptreact = { 'eslint' },
+      typescript = { 'eslint' },
+      typescriptreact = { 'eslint' },
     }
 
     -- To allow other plugins to add linters to require('lint').linters_by_ft,

@@ -210,6 +210,7 @@ return { -- LSP Plugins
 
         pyright = {},
         ts_ls = {},
+        astro = {},
         tailwindcss = {},
         eslint = {},
         gopls = {},
