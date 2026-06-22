@@ -2,6 +2,9 @@
 -- See `:help vim.opt`
 -- NOTE: For more options, you can see `:help option-list`
 
+-- Set to true if you have a Nerd Font installed (enables icons in statusline, etc.)
+vim.g.have_nerd_font = true
+
 -- Make line numbers default and relativenumber
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -95,3 +98,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- [[ Shader filetypes ]]
+-- GLSL (.vert/.frag/.comp/...) and WGSL (.wgsl) are detected by Neovim built-in.
+-- HLSL has no built-in detection, so map its extensions here.
+vim.filetype.add {
+  extension = {
+    hlsl = 'hlsl',
+    hlsli = 'hlsl',
+    fx = 'hlsl',
+    fxh = 'hlsl',
+    cginc = 'hlsl', -- Unity CG include
+    compute = 'hlsl', -- Unity compute shader
+  },
+}

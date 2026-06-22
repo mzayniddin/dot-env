@@ -1,5 +1,33 @@
 return {
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000, -- Load before all other start plugins so highlights are set first.
+    lazy = false,
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'mocha',
+        -- Enable integrations so catppuccin owns these plugins' highlight groups.
+        -- Without these, the plugins set their own default colors at startup and
+        -- the statusline / some UI elements look slightly off until re-applied.
+        integrations = {
+          mini = { enabled = true },
+          gitsigns = true,
+          neotree = true,
+          alpha = true,
+          indent_blankline = { enabled = true },
+          telescope = { enabled = true },
+          which_key = true,
+          native_lsp = { enabled = true },
+          treesitter = true,
+          cmp = true,
+          mason = true,
+        },
+      }
+      -- Load the colorscheme here.
+      vim.cmd.colorscheme 'catppuccin'
+    end,
+  },
   {
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -10,8 +38,6 @@ return {
           comments = { italic = true },
         },
       }
-      -- Load the colorscheme here.
-      vim.cmd.colorscheme 'catppuccin'
     end,
   },
   {

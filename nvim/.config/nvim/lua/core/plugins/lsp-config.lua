@@ -211,6 +211,8 @@ return { -- LSP Plugins
         pyright = {},
         ts_ls = {},
         astro = {},
+        glsl_analyzer = {},
+        wgsl_analyzer = {},
         tailwindcss = {},
         eslint = {},
         gopls = {},
@@ -246,6 +248,7 @@ return { -- LSP Plugins
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'prettier',
+        'clang-format', -- Formats GLSL/HLSL shaders
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

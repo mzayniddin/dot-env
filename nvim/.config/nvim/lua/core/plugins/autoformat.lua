@@ -39,6 +39,8 @@ return {
       css = { 'prettier' },
       html = { 'prettier' },
       json = { 'prettier' },
+      glsl = { 'clang-format' },
+      hlsl = { 'clang-format' },
     },
   },
 }
