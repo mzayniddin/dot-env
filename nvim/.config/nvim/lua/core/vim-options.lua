@@ -113,6 +113,20 @@ vim.filetype.add {
   },
 }
 
+-- Keep shader indentation at 2 spaces so typing matches clang-format's output.
+-- (vim-sleuth auto-detects per file; this sets a consistent default, and the
+-- formatted example files are 2-space so detection agrees.)
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('shader-indent', { clear = true }),
+  pattern = { 'glsl', 'hlsl', 'wgsl' },
+  callback = function()
+    vim.bo.expandtab = true
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.softtabstop = 2
+  end,
+})
+
 -- [[ Shader live preview ]]
 -- <leader>gp opens a hot-reloading glslViewer window for the current shader in a
 -- tmux split (the GPU window floats; the split shows the glslViewer console).
@@ -128,5 +142,5 @@ vim.keymap.set('n', '<leader>gp', function()
     vim.notify('Not inside tmux — run `glslViewer <file>` in a terminal instead', vim.log.levels.WARN)
     return
   end
-  vim.fn.system { 'tmux', 'split-window', '-h', '-d', 'glslViewer ' .. vim.fn.shellescape(file) .. ' -w 700 -h 700' }
+  vim.fn.system { 'tmux', 'split-window', '-v', '-l', '12', '-d', 'glslViewer ' .. vim.fn.shellescape(file) .. ' -w 700 -h 700' }
 end, { desc = '[G]LSL [P]review (glslViewer)' })
