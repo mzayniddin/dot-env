@@ -112,3 +112,21 @@ vim.filetype.add {
     compute = 'hlsl', -- Unity compute shader
   },
 }
+
+-- [[ Shader live preview ]]
+-- <leader>gp opens a hot-reloading glslViewer window for the current shader in a
+-- tmux split (the GPU window floats; the split shows the glslViewer console).
+-- Requires tmux + glslViewer. (<leader>s* is the Telescope "Search" namespace,
+-- so this uses <leader>gp.)
+vim.keymap.set('n', '<leader>gp', function()
+  local file = vim.fn.expand '%:p'
+  if file == '' then
+    vim.notify('No file in this buffer', vim.log.levels.WARN)
+    return
+  end
+  if vim.env.TMUX == nil then
+    vim.notify('Not inside tmux — run `glslViewer <file>` in a terminal instead', vim.log.levels.WARN)
+    return
+  end
+  vim.fn.system { 'tmux', 'split-window', '-h', '-d', 'glslViewer ' .. vim.fn.shellescape(file) .. ' -w 700 -h 700' }
+end, { desc = '[G]LSL [P]review (glslViewer)' })

@@ -107,6 +107,27 @@ Inside Neovim:
 HLSL extension detection is registered in `lua/core/vim-options.lua` via `vim.filetype.add`.
 `clang-format` picks up a project-local `.clang-format` file if present.
 
+### Live preview (GLSL / Shadertoy-style)
+
+Edit a shader in nvim and see it update live, without leaving the terminal. Uses
+[glslViewer](https://github.com/patriciogonzalezvivo/glslViewer), which watches the file and
+re-renders on every save in its own GPU window (Shadertoy-style uniforms: `u_time`,
+`u_resolution`, `u_mouse`, …).
+
+**Requires:** `brew install glslviewer` (pulls in `ffmpeg` + `glfw`). Optional: `fzf` for a nicer
+shader picker (falls back to a numbered prompt otherwise).
+
+| Trigger | What it does |
+| --- | --- |
+| `<leader>gp` in nvim | Opens a hot-reloading preview of **the current shader** in a tmux split (GPU window floats; console shows in the split). Requires running inside tmux. |
+| `glslViewer <file>` in a shell | Run glslViewer directly on a shader (e.g. `glslViewer plasma.frag`). |
+
+The glslViewer **console** runs in the split pane: type commands with **no colon** (e.g. `help`,
+`fps`, `screenshot,out.png`).
+
+Workflow: keep nvim in one pane, hit `<leader>sp` → the preview window appears and updates every
+time you save. Press `ESC`/`q` in the preview window to close it.
+
 ## Notes & troubleshooting
 
 - **`:TSUpdate` fails with `ENOENT: 'tree-sitter'`** → the `tree-sitter` CLI isn't on your `PATH`.
